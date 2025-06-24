@@ -31,7 +31,16 @@ export default class LinkedList<T = any> {
     this.#size++;
   }
 
-  insertAtEnd(item: T): void {}
+  insertAtEnd(item: T): void {
+    if (this.isEmpty()) {
+      this.#head = new ListNode(item);
+      this.#tail = this.#head;
+    } else {
+      this.#tail!.next = new ListNode(item);
+      this.#tail = this.#tail!.next;
+    }
+    this.#size++;
+  }
 
   insert(item: T, index?: number): void {}
 
