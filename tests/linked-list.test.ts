@@ -60,6 +60,11 @@ describe('LinkedList', () => {
     expect(list.toArray()).toEqual([1, 2, 3]);
   });
 
+  test('insert at index less than 0 or greater than size', () => {
+    expect(() => list.insert(2, 3)).toThrow('Index is out of range');
+    expect(() => list.insert(2, -1)).toThrow('Index is out of range');
+  });
+
   test('insert at index 0 is same as insertAtFirst', () => {
     list.insert(9, 0);
     expect(list.toArray()).toEqual([9]);

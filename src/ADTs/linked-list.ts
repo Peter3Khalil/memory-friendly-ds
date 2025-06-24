@@ -42,7 +42,27 @@ export default class LinkedList<T = any> {
     this.#size++;
   }
 
-  insert(item: T, index?: number): void {}
+  insert(item: T, index?: number): void {
+    if (typeof index === 'undefined' || index === this.#size)
+      return this.insertAtEnd(item);
+    else if (index === 0) return this.insertAtFirst(item);
+    else if (index > 0 && index < this.#size) {
+      let curr = this.#head;
+      let prev: ListNode<T> | null = null;
+      let i = 0;
+      while (i < index && curr) {
+        prev = curr;
+        curr = curr.next;
+        i++;
+      }
+      let node = new ListNode(item);
+      prev!.next = node;
+      node.next = curr;
+      this.#size++;
+    } else {
+      throw new Error('Index is out of range');
+    }
+  }
 
   isEmpty(): boolean {
     return this.#size === 0;
