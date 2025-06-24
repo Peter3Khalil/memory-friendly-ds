@@ -1,4 +1,4 @@
-class ListNode<T = unknown> {
+export class ListNode<T = unknown> {
   value: T;
   next: ListNode<T> | null;
 

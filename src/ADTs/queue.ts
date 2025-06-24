@@ -1,14 +1,4 @@
-import LinkedList from './linked-list';
-
-class ListNode<T = unknown> {
-  value: T;
-  next: ListNode<T> | null;
-
-  constructor(value: T, next: ListNode<T> | null = null) {
-    this.value = value;
-    this.next = next;
-  }
-}
+import LinkedList, { ListNode } from './linked-list';
 
 export default class Queue<T = unknown> {
   #list: LinkedList<T>;
