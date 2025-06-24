@@ -1,7 +1,11 @@
 {
-  "name": "data-structure",
+  "name": "memory-friendly-data-structure",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",

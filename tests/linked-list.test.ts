@@ -1,4 +1,4 @@
-import { LinkedList } from '../src/ADTs';
+import { LinkedList } from '../src';
 
 describe('LinkedList', () => {
   let list: LinkedList<number>;
@@ -11,8 +11,8 @@ describe('LinkedList', () => {
     expect(list.toArray()).toEqual(expected);
     expect(list.getSize()).toBe(expected.length);
     expect(list.isEmpty()).toBe(expected.length === 0);
-    expect(list.getHead()?.value).toBe(expected.at(0));
-    expect(list.getTail()?.value).toBe(expected.at(-1));
+    expect(list.getHead()?.value).toBe(expected[0]);
+    expect(list.getTail()?.value).toBe(expected[expected.length - 1]);
   };
 
   describe('initial state', () => {
