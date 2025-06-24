@@ -97,6 +97,27 @@ export default class LinkedList<T = any> {
     return true;
   }
 
+  remove(index?: number): boolean {
+    if (this.isEmpty()) return false;
+    else if (typeof index === 'undefined') return this.removeFromEnd();
+    else if (index < 0 || index > this.#size - 1) return false;
+    else if (index === 0) return this.removeFromFirst();
+    else {
+      let prev = this.#head!;
+      let curr = this.#head!.next!;
+      let i = 1;
+      while (i < index && curr) {
+        prev = curr;
+        curr = curr.next!;
+        i++;
+      }
+      prev.next = curr.next;
+      curr.next = null;
+      this.#size--;
+      return true;
+    }
+  }
+
   isEmpty(): boolean {
     return this.#size === 0;
   }

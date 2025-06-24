@@ -157,4 +157,60 @@ describe('LinkedList', () => {
       expect(list.isEmpty()).toBe(true);
     });
   });
+
+  describe('remove(index?: number)', () => {
+    it('should return false for invalid negative or too-large index', () => {
+      expect(list.remove(-1)).toBe(false);
+      expect(list.remove(0)).toBe(false); // empty list
+      list.insertAtEnd(1);
+      expect(list.remove(1)).toBe(false); // index out of bounds
+    });
+
+    it('should remove from the end when index is undefined', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(2);
+      list.insertAtEnd(3);
+      expect(list.remove()).toBe(true); // remove last (3)
+      expect(list.toArray()).toEqual([1, 2]);
+    });
+
+    it('should remove from the start when index is 0', () => {
+      list.insertAtEnd(10);
+      list.insertAtEnd(20);
+      expect(list.remove(0)).toBe(true); // remove first (10)
+      expect(list.getHead()?.value).toBe(20);
+      expect(list.getTail()?.value).toBe(20);
+      expect(list.toArray()).toEqual([20]);
+    });
+
+    it('should remove from the middle', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(2);
+      list.insertAtEnd(3);
+      list.insertAtEnd(4);
+      expect(list.remove(2)).toBe(true); // remove 3
+      expect(list.getSize()).toBe(3);
+      expect(list.toArray()).toEqual([1, 2, 4]);
+    });
+
+    it('should update head and tail correctly after removals', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(2);
+      list.insertAtEnd(3);
+      list.remove(0); // remove head
+      list.remove(); // remove tail
+      expect(list.getHead()?.value).toBe(2);
+      expect(list.getTail()?.value).toBe(2);
+      expect(list.toArray()).toEqual([2]);
+    });
+
+    it('should clean up to empty', () => {
+      list.insert(5);
+      expect(list.remove(0)).toBe(true);
+      expect(list.getSize()).toBe(0);
+      expect(list.isEmpty()).toBe(true);
+      expect(list.getHead()).toBeNull();
+      expect(list.getTail()).toBeNull();
+    });
+  });
 });
