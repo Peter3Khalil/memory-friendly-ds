@@ -7,73 +7,78 @@ describe('LinkedList', () => {
     list = new LinkedList<number>();
   });
 
-  test('initially should be empty', () => {
-    expect(list.isEmpty()).toBe(true);
-    expect(list.getSize()).toBe(0);
-    expect(list.getHead()).toBeNull();
-    expect(list.getTail()).toBeNull();
-    expect(list.toArray()).toEqual([]);
+  const assertList = (expected: number[]) => {
+    expect(list.toArray()).toEqual(expected);
+    expect(list.getSize()).toBe(expected.length);
+    expect(list.isEmpty()).toBe(expected.length === 0);
+    expect(list.getHead()?.value).toBe(expected.at(0));
+    expect(list.getTail()?.value).toBe(expected.at(-1));
+  };
+
+  describe('initial state', () => {
+    it('should be empty', () => {
+      assertList([]);
+    });
   });
 
-  test('insertAtFirst should insert one item at the beginning', () => {
-    list.insertAtFirst(1);
-    expect(list.getSize()).toBe(1);
-    expect(list.isEmpty()).toBe(false);
-    expect(list.getHead()?.value).toBe(1);
-    expect(list.getTail()?.value).toBe(1);
-    expect(list.toArray()).toEqual([1]);
+  describe('insertAtFirst()', () => {
+    it('should insert a single item at the beginning', () => {
+      list.insertAtFirst(1);
+      assertList([1]);
+    });
+
+    it('should insert multiple items in reverse order', () => {
+      list.insertAtFirst(1);
+      list.insertAtFirst(2);
+      list.insertAtFirst(3);
+      assertList([3, 2, 1]);
+    });
   });
 
-  test('insertAtEnd should insert one item at the end', () => {
-    list.insertAtEnd(5);
-    expect(list.getSize()).toBe(1);
-    expect(list.getHead()?.value).toBe(5);
-    expect(list.getTail()?.value).toBe(5);
-    expect(list.toArray()).toEqual([5]);
+  describe('insertAtEnd()', () => {
+    it('should insert a single item at the end', () => {
+      list.insertAtEnd(5);
+      assertList([5]);
+    });
+
+    it('should append multiple items in order', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(2);
+      list.insertAtEnd(3);
+      assertList([1, 2, 3]);
+    });
   });
 
-  test('insertAtEnd should append multiple items in order', () => {
-    list.insertAtEnd(1);
-    list.insertAtEnd(2);
-    list.insertAtEnd(3);
-    expect(list.getSize()).toBe(3);
-    expect(list.getHead()?.value).toBe(1);
-    expect(list.getTail()?.value).toBe(3);
-    expect(list.toArray()).toEqual([1, 2, 3]);
-  });
+  describe('insert(index)', () => {
+    it('should insert in the middle of the list', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(3);
+      list.insert(2, 1); // insert 2 at index 1
+      assertList([1, 2, 3]);
+    });
 
-  test('insertAtFirst should prepend multiple items in reverse order', () => {
-    list.insertAtFirst(1);
-    list.insertAtFirst(2);
-    list.insertAtFirst(3);
-    expect(list.getHead()?.value).toBe(3);
-    expect(list.getTail()?.value).toBe(1);
-    expect(list.getSize()).toBe(3);
-    expect(list.toArray()).toEqual([3, 2, 1]);
-  });
+    it('should insert at index 0 (same as insertAtFirst)', () => {
+      list.insert(9, 0);
+      assertList([9]);
+    });
 
-  test('insert at specific index', () => {
-    list.insertAtEnd(1);
-    list.insertAtEnd(3);
-    list.insert(2, 1); // insert 2 at index 1
-    expect(list.getSize()).toBe(3);
-    expect(list.toArray()).toEqual([1, 2, 3]);
-  });
+    it('should default to end when index is not provided', () => {
+      list.insert(1);
+      list.insert(2);
+      list.insert(3);
+      assertList([1, 2, 3]);
+    });
 
-  test('insert at index less than 0 or greater than size', () => {
-    expect(() => list.insert(2, 3)).toThrow('Index is out of range');
-    expect(() => list.insert(2, -1)).toThrow('Index is out of range');
-  });
+    it('should throw error when index is less than 0 or greater than size', () => {
+      expect(() => list.insert(2, -1)).toThrow('Index is out of range');
+      expect(() => list.insert(2, 1)).toThrow('Index is out of range'); // size is 0
+    });
 
-  test('insert at index 0 is same as insertAtFirst', () => {
-    list.insert(9, 0);
-    expect(list.toArray()).toEqual([9]);
-  });
-
-  test('insert without index should default to end', () => {
-    list.insert(1);
-    list.insert(2);
-    list.insert(3);
-    expect(list.toArray()).toEqual([1, 2, 3]);
+    it('should insert at end if index === size', () => {
+      list.insert(1, 0);
+      list.insert(2, 1);
+      list.insert(3, 2);
+      assertList([1, 2, 3]);
+    });
   });
 });
