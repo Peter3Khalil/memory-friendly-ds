@@ -1,3 +1,5 @@
+import LinkedList from './linked-list';
+
 class ListNode<T = unknown> {
   value: T;
   next: ListNode<T> | null;
@@ -9,48 +11,33 @@ class ListNode<T = unknown> {
 }
 
 export default class Queue<T = unknown> {
-  #front: ListNode<T> | null;
-  #rear: ListNode<T> | null;
-  #size: number;
+  #list: LinkedList<T>;
   constructor() {
-    this.#front = null;
-    this.#rear = null;
-    this.#size = 0;
+    this.#list = new LinkedList<T>();
   }
 
   enQueue(item: T): void {
-    if (this.isEmpty()) {
-      this.#front = new ListNode(item);
-      this.#rear = this.#front;
-    } else {
-      this.#rear!.next = new ListNode(item);
-      this.#rear = this.#rear!.next;
-    }
-    this.#size++;
+    this.#list.insertAtEnd(item);
   }
-  deQueue(): boolean {
-    throw new Error('Method not implemented.');
+  deQueue(): ListNode<T> | null {
+    let item = this.getFront();
+    this.#list.removeFromFirst();
+    return item;
   }
   isEmpty(): boolean {
-    return this.#size === 0;
+    return this.#list.isEmpty();
   }
   getFront(): ListNode<T> | null {
-    return this.#front;
+    return this.#list.getHead();
   }
   getRear(): ListNode<T> | null {
-    return this.#rear;
+    return this.#list.getTail();
   }
   getSize(): number {
-    return this.#size;
+    return this.#list.getSize();
   }
   toArray(): T[] {
-    let arr = [];
-    let currentNode = this.#front;
-    while (currentNode) {
-      arr.push(currentNode.value);
-      currentNode = currentNode.next;
-    }
-    return arr;
+    return this.#list.toArray();
   }
   clear(): void {
     throw new Error('Method not implemented.');
