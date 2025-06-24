@@ -23,7 +23,8 @@ export default class LinkedList<T = unknown> {
     if (this.isEmpty()) {
       this.#head = new ListNode(item);
       this.#tail = this.#head;
-    } else {      let newNode = new ListNode(item);
+    } else {
+      let newNode = new ListNode(item);
       newNode.next = this.#head;
       this.#head = newNode;
     }
@@ -165,6 +166,17 @@ export default class LinkedList<T = unknown> {
 
   getSize(): number {
     return this.#size;
+  }
+
+  search(item: T): number {
+    let currentNode = this.#head;
+    let position = 0;
+    while (currentNode) {
+      if (currentNode.value === item) return position;
+      currentNode = currentNode.next;
+      position++;
+    }
+    return -1;
   }
 
   *[Symbol.iterator](): Iterator<T> {

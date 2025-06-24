@@ -272,4 +272,66 @@ describe('LinkedList', () => {
       expect(sum).toBe(6);
     });
   });
+
+  describe('Search', () => {
+    it('should return -1 when searching in empty list', () => {
+      const list = new LinkedList();
+      expect(list.search(5)).toBe(-1);
+    });
+
+    it('should return 0 when item is at head position', () => {
+      const list = new LinkedList<number>();
+      list.insertAtFirst(5);
+      expect(list.search(5)).toBe(0);
+    });
+
+    it('should return correct position for item in the middle', () => {
+      const list = new LinkedList<number>();
+      list.insertAtEnd(10);
+      list.insertAtEnd(20);
+      list.insertAtEnd(30);
+      expect(list.search(20)).toBe(1);
+    });
+
+    it('should return last index when item is at tail position', () => {
+      const list = new LinkedList<number>();
+      list.insertAtEnd(10);
+      list.insertAtEnd(20);
+      list.insertAtEnd(30);
+      expect(list.search(30)).toBe(2);
+    });
+
+    it('should return -1 when item not found', () => {
+      const list = new LinkedList<number>();
+      list.insertAtEnd(10);
+      list.insertAtEnd(20);
+      expect(list.search(30)).toBe(-1);
+    });
+
+    it('should find first occurrence when duplicates exist', () => {
+      const list = new LinkedList<number>();
+      list.insertAtEnd(10);
+      list.insertAtEnd(20);
+      list.insertAtEnd(10);
+      expect(list.search(10)).toBe(0);
+    });
+
+    it('should work with string values', () => {
+      const list = new LinkedList<string>();
+      list.insertAtEnd('apple');
+      list.insertAtEnd('banana');
+      list.insertAtEnd('orange');
+      expect(list.search('banana')).toBe(1);
+    });
+
+    it('should work with object values when searching for reference', () => {
+      const obj1 = { id: 1 };
+      const obj2 = { id: 2 };
+      const list = new LinkedList<object>();
+      list.insertAtEnd(obj1);
+      list.insertAtEnd(obj2);
+      expect(list.search(obj1)).toBe(0);
+      expect(list.search({ id: 1 })).toBe(-1); // Different reference
+    });
+  });
 });
