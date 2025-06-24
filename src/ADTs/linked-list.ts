@@ -23,10 +23,9 @@ export default class LinkedList<T = unknown> {
     if (this.isEmpty()) {
       this.#head = new ListNode(item);
       this.#tail = this.#head;
-    } else {
-      let node = new ListNode(item);
-      node.next = this.#head;
-      this.#head = node;
+    } else {      let newNode = new ListNode(item);
+      newNode.next = this.#head;
+      this.#head = newNode;
     }
     this.#size++;
   }
@@ -43,38 +42,50 @@ export default class LinkedList<T = unknown> {
   }
 
   insert(item: T, index?: number): void {
-    if (typeof index === 'undefined' || index === this.#size)
+    if (typeof index === 'undefined' || index === this.#size) {
       return this.insertAtEnd(item);
-    else if (index === 0) return this.insertAtFirst(item);
-    else if (index > 0 && index < this.#size) {
-      let curr = this.#head;
-      let prev: ListNode<T> | null = null;
-      let i = 0;
-      while (i < index && curr) {
-        prev = curr;
-        curr = curr.next;
-        i++;
-      }
-      let node = new ListNode(item);
-      prev!.next = node;
-      node.next = curr;
-      this.#size++;
-    } else {
+    }
+
+    if (index === 0) {
+      return this.insertAtFirst(item);
+    }
+
+    if (index < 0 || index > this.#size) {
       throw new Error('Index is out of range');
     }
+
+    let currentNode = this.#head;
+    let previousNode: ListNode<T> | null = null;
+    let position = 0;
+
+    while (position < index && currentNode) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+      position++;
+    }
+
+    let newNode = new ListNode(item);
+    previousNode!.next = newNode;
+    newNode.next = currentNode;
+    this.#size++;
   }
 
   removeFromEnd(): boolean {
-    if (this.isEmpty()) return false;
-    let prev: ListNode<T> | null = null,
-      curr = this.#head;
-    while (curr && curr.next) {
-      prev = curr;
-      curr = curr.next;
+    if (this.isEmpty()) {
+      return false;
     }
-    if (prev) {
-      prev.next = null;
-      this.#tail = prev;
+
+    let previousNode: ListNode<T> | null = null;
+    let currentNode = this.#head;
+
+    while (currentNode && currentNode.next) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+    }
+
+    if (previousNode) {
+      previousNode.next = null;
+      this.#tail = previousNode;
     } else {
       this.#head = null;
       this.#tail = null;
@@ -89,33 +100,45 @@ export default class LinkedList<T = unknown> {
       this.#head = null;
       this.#tail = null;
     } else {
-      let temp: ListNode<T> | null = this.#head!;
+      let removedNode: ListNode<T> | null = this.#head!;
       this.#head = this.#head?.next ?? null;
-      temp.next = null;
+      removedNode.next = null; // Remove reference to be Garbage Collected
     }
     this.#size--;
     return true;
   }
 
   remove(index?: number): boolean {
-    if (this.isEmpty()) return false;
-    else if (typeof index === 'undefined') return this.removeFromEnd();
-    else if (index < 0 || index > this.#size - 1) return false;
-    else if (index === 0) return this.removeFromFirst();
-    else {
-      let prev = this.#head!;
-      let curr = this.#head!.next!;
-      let i = 1;
-      while (i < index && curr) {
-        prev = curr;
-        curr = curr.next!;
-        i++;
-      }
-      prev.next = curr.next;
-      curr.next = null;
-      this.#size--;
-      return true;
+    if (this.isEmpty()) {
+      return false;
     }
+
+    if (typeof index === 'undefined') {
+      return this.removeFromEnd();
+    }
+
+    if (index < 0 || index > this.#size - 1) {
+      return false;
+    }
+
+    if (index === 0) {
+      return this.removeFromFirst();
+    }
+
+    let previousNode = this.#head!;
+    let nodeToRemove = this.#head!.next!;
+    let position = 1;
+
+    while (position < index && nodeToRemove) {
+      previousNode = nodeToRemove;
+      nodeToRemove = nodeToRemove.next!;
+      position++;
+    }
+
+    previousNode.next = nodeToRemove.next;
+    nodeToRemove.next = null;
+    this.#size--;
+    return true;
   }
 
   isEmpty(): boolean {
@@ -123,13 +146,13 @@ export default class LinkedList<T = unknown> {
   }
 
   toArray(): Array<T> {
-    let curr = this.#head;
-    const arr = [];
-    while (curr) {
-      arr.push(curr.value);
-      curr = curr.next;
+    let currentNode = this.#head;
+    const resultArray = [];
+    while (currentNode) {
+      resultArray.push(currentNode.value);
+      currentNode = currentNode.next;
     }
-    return arr;
+    return resultArray;
   }
 
   getHead(): ListNode<T> | null {
@@ -145,10 +168,10 @@ export default class LinkedList<T = unknown> {
   }
 
   *[Symbol.iterator](): Iterator<T> {
-    let current = this.#head;
-    while (current) {
-      yield current.value;
-      current = current.next;
+    let currentNode = this.#head;
+    while (currentNode) {
+      yield currentNode.value;
+      currentNode = currentNode.next;
     }
   }
 }
