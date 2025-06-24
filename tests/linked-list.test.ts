@@ -119,4 +119,42 @@ describe('LinkedList', () => {
       expect(list.isEmpty()).toBe(true);
     });
   });
+
+  describe('removeFromFirst()', () => {
+    it('should return false if the list is empty', () => {
+      expect(list.removeFromFirst()).toBe(false);
+      expect(list.getSize()).toBe(0);
+      expect(list.toArray()).toEqual([]);
+    });
+
+    it('should remove the only node in a one-element list', () => {
+      list.insertAtFirst(100);
+      expect(list.removeFromFirst()).toBe(true);
+      expect(list.getSize()).toBe(0);
+      expect(list.getHead()).toBeNull();
+      expect(list.getTail()).toBeNull();
+      expect(list.toArray()).toEqual([]);
+    });
+
+    it('should remove the first node in a multi-node list', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(2);
+      list.insertAtEnd(3);
+      expect(list.removeFromFirst()).toBe(true);
+      expect(list.getSize()).toBe(2);
+      expect(list.getHead()?.value).toBe(2);
+      expect(list.toArray()).toEqual([2, 3]);
+    });
+
+    it('should remove repeatedly until list is empty', () => {
+      list.insertAtEnd(5);
+      list.insertAtEnd(6);
+      list.insertAtEnd(7);
+      expect(list.removeFromFirst()).toBe(true); // [6, 7]
+      expect(list.removeFromFirst()).toBe(true); // [7]
+      expect(list.removeFromFirst()).toBe(true); // []
+      expect(list.removeFromFirst()).toBe(false); // already empty
+      expect(list.isEmpty()).toBe(true);
+    });
+  });
 });

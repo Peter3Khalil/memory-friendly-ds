@@ -83,6 +83,20 @@ export default class LinkedList<T = any> {
     return true;
   }
 
+  removeFromFirst(): boolean {
+    if (this.isEmpty()) return false;
+    if (this.#size === 1) {
+      this.#head = null;
+      this.#tail = null;
+    } else {
+      let temp: ListNode<T> | null = this.#head!;
+      this.#head = this.#head?.next ?? null;
+      temp.next = null;
+    }
+    this.#size--;
+    return true;
+  }
+
   isEmpty(): boolean {
     return this.#size === 0;
   }
