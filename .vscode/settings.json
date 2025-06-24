@@ -3,6 +3,6 @@
   "jest.rootPath": ".",
   "jest.runMode": {
     "showInlineError": true,
-    "type": "on-demand"
+    "type": "on-save"
   }
 }
