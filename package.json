@@ -1,6 +1,6 @@
 {
   "name": "memory-friendly-ds",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && tsc",
+    "build": "tsup",
     "start": "npm run build && node dist/index.js",
     "test": "jest",
     "report": "start jest-stare/index.html"
@@ -23,6 +23,14 @@
     "jest-stare": "^2.5.2",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.4.0",
+    "tsup": "^8.5.0",
     "typescript": "^5.8.3"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   }
 }
