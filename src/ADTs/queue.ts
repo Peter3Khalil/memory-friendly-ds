@@ -40,6 +40,6 @@ export default class Queue<T = unknown> {
     return this.#list.toArray();
   }
   clear(): void {
-    throw new Error('Method not implemented.');
+    this.#list = new LinkedList<T>();
   }
 }
