@@ -19,7 +19,17 @@ export default class LinkedList<T = any> {
     this.#size = 0;
   }
 
-  insertAtFirst(item: T): void {}
+  insertAtFirst(item: T): void {
+    if (this.isEmpty()) {
+      this.#head = new ListNode(item);
+      this.#tail = this.#head;
+    } else {
+      let node = new ListNode(item);
+      node.next = this.#head;
+      this.#head = node;
+    }
+    this.#size++;
+  }
 
   insertAtEnd(item: T): void {}
 

@@ -46,6 +46,8 @@ describe('LinkedList', () => {
     list.insertAtFirst(1);
     list.insertAtFirst(2);
     list.insertAtFirst(3);
+    expect(list.getHead()?.value).toBe(3);
+    expect(list.getTail()?.value).toBe(1);
     expect(list.getSize()).toBe(3);
     expect(list.toArray()).toEqual([3, 2, 1]);
   });
@@ -70,5 +72,3 @@ describe('LinkedList', () => {
     expect(list.toArray()).toEqual([1, 2, 3]);
   });
 });
-
-
