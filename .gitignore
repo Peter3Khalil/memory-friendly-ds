@@ -1,0 +1,17 @@
+node_modules/
+
+dist/
+
+coverage/
+jest-stare/
+tests/report/
+*.log
+
+*.tsbuildinfo
+
+.env
+
+*.code-workspace
+
+.DS_Store
+Thumbs.db

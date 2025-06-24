@@ -1,0 +1,8 @@
+{
+  "jest.jestCommandLine": "npm test --",
+  "jest.rootPath": ".",
+  "jest.runMode": {
+    "showInlineError": true,
+    "type": "on-demand"
+  }
+}
