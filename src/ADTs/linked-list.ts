@@ -64,6 +64,25 @@ export default class LinkedList<T = any> {
     }
   }
 
+  removeFromEnd(): boolean {
+    if (this.isEmpty()) return false;
+    let prev: ListNode<T> | null = null,
+      curr = this.#head;
+    while (curr && curr.next) {
+      prev = curr;
+      curr = curr.next;
+    }
+    if (prev) {
+      prev.next = null;
+      this.#tail = prev;
+    } else {
+      this.#head = null;
+      this.#tail = null;
+    }
+    this.#size--;
+    return true;
+  }
+
   isEmpty(): boolean {
     return this.#size === 0;
   }

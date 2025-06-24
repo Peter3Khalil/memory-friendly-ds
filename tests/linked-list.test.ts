@@ -81,4 +81,42 @@ describe('LinkedList', () => {
       assertList([1, 2, 3]);
     });
   });
+
+  describe('removeFromEnd()', () => {
+    it('should return false if the list is empty', () => {
+      expect(list.removeFromEnd()).toBe(false);
+      expect(list.getSize()).toBe(0);
+      expect(list.toArray()).toEqual([]);
+    });
+
+    it('should remove the only node in a one-element list', () => {
+      list.insertAtEnd(42);
+      expect(list.removeFromEnd()).toBe(true);
+      expect(list.getSize()).toBe(0);
+      expect(list.getHead()).toBeNull();
+      expect(list.getTail()).toBeNull();
+      expect(list.toArray()).toEqual([]);
+    });
+
+    it('should remove the last node in a multi-node list', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(2);
+      list.insertAtEnd(3);
+      expect(list.removeFromEnd()).toBe(true);
+      expect(list.getSize()).toBe(2);
+      expect(list.getTail()?.value).toBe(2);
+      expect(list.toArray()).toEqual([1, 2]);
+    });
+
+    it('should remove nodes repeatedly until list is empty', () => {
+      list.insertAtEnd(10);
+      list.insertAtEnd(20);
+      list.insertAtEnd(30);
+      expect(list.removeFromEnd()).toBe(true); // [10, 20]
+      expect(list.removeFromEnd()).toBe(true); // [10]
+      expect(list.removeFromEnd()).toBe(true); // []
+      expect(list.removeFromEnd()).toBe(false); // already empty
+      expect(list.isEmpty()).toBe(true);
+    });
+  });
 });
