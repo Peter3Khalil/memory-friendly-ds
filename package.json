@@ -11,7 +11,8 @@
     "build": "tsup",
     "start": "npm run build && node dist/index.js",
     "test": "jest",
-    "report": "start jest-stare/index.html"
+    "report": "start jest-stare/index.html",
+    "format": "prettier --write src/**/*.ts && prettier --write tests/**/*.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "@types/jest": "^30.0.0",
     "jest": "^30.0.2",
     "jest-stare": "^2.5.2",
+    "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.4.0",
     "tsup": "^8.5.0",
