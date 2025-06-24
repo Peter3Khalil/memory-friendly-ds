@@ -1,4 +1,4 @@
-class ListNode<T = any> {
+class ListNode<T = unknown> {
   value: T;
   next: ListNode<T> | null;
 
@@ -8,7 +8,7 @@ class ListNode<T = any> {
   }
 }
 
-export default class LinkedList<T = any> {
+export default class LinkedList<T = unknown> {
   #head: ListNode<T> | null;
   #tail: ListNode<T> | null;
   #size: number;
@@ -142,5 +142,13 @@ export default class LinkedList<T = any> {
 
   getSize(): number {
     return this.#size;
+  }
+
+  *[Symbol.iterator](): Iterator<T> {
+    let current = this.#head;
+    while (current) {
+      yield current.value;
+      current = current.next;
+    }
   }
 }

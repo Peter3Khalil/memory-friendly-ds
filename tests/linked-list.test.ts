@@ -213,4 +213,63 @@ describe('LinkedList', () => {
       expect(list.getTail()).toBeNull();
     });
   });
+
+  describe('Iterator functionality', () => {
+    it('should be iterable with for...of loop', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(2);
+      list.insertAtEnd(3);
+
+      const result: number[] = [];
+      for (const value of list) {
+        result.push(value);
+      }
+
+      expect(result).toEqual([1, 2, 3]);
+    });
+
+    it('should work with spread operator', () => {
+      list.insertAtEnd(10);
+      list.insertAtEnd(20);
+      list.insertAtEnd(30);
+
+      const array = [...list];
+      expect(array).toEqual([10, 20, 30]);
+    });
+
+    it('should work with array destructuring', () => {
+      list.insertAtEnd(5);
+      list.insertAtEnd(6);
+      list.insertAtEnd(7);
+
+      const [first, second, third] = list;
+      expect(first).toBe(5);
+      expect(second).toBe(6);
+      expect(third).toBe(7);
+    });
+
+    it('should work with empty lists', () => {
+      // Empty list test
+      const emptyArray = [...list];
+      expect(emptyArray).toEqual([]);
+    });
+
+    it('should work with array methods', () => {
+      list.insertAtEnd(1);
+      list.insertAtEnd(2);
+      list.insertAtEnd(3);
+
+      // Map
+      const doubled = [...list].map((x) => x * 2);
+      expect(doubled).toEqual([2, 4, 6]);
+
+      // Filter
+      const filtered = [...list].filter((x) => x > 1);
+      expect(filtered).toEqual([2, 3]);
+
+      // Reduce
+      const sum = [...list].reduce((acc, val) => acc + val, 0);
+      expect(sum).toBe(6);
+    });
+  });
 });
