@@ -15,21 +15,27 @@
     "start": "npm run build && node dist/index.js",
     "test": "jest",
     "report": "start jest-stare/index.html",
-    "format": "prettier --write src/**/*.ts && prettier --write tests/**/*.ts"
+    "format": "prettier --write src/**/*.ts && prettier --write tests/**/*.ts",
+    "lint": "eslint src tests --fix",
+    "typecheck": "tsc --noEmit",
+    "pre-commit": "npm run lint && npm run typecheck && npm run test && npm run format"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@eslint/js": "^9.29.0",
     "@types/jest": "^30.0.0",
+    "eslint": "^9.29.0",
     "jest": "^30.0.2",
     "jest-stare": "^2.5.2",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.4.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.0"
   },
   "exports": {
     "./package.json": "./package.json",
