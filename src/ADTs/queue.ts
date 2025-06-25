@@ -10,7 +10,7 @@ export default class Queue<T = unknown> {
     this.#list.insertAtEnd(item);
   }
   deQueue(): ListNode<T> | null {
-    let item = this.getFront();
+    const item = this.getFront();
     this.#list.removeFromFirst();
     return item;
   }

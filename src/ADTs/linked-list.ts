@@ -24,7 +24,7 @@ export default class LinkedList<T = unknown> {
       this.#head = new ListNode(item);
       this.#tail = this.#head;
     } else {
-      let newNode = new ListNode(item);
+      const newNode = new ListNode(item);
       newNode.next = this.#head;
       this.#head = newNode;
     }
@@ -65,7 +65,7 @@ export default class LinkedList<T = unknown> {
       position++;
     }
 
-    let newNode = new ListNode(item);
+    const newNode = new ListNode(item);
     previousNode!.next = newNode;
     newNode.next = currentNode;
     this.#size++;
@@ -101,7 +101,7 @@ export default class LinkedList<T = unknown> {
       this.#head = null;
       this.#tail = null;
     } else {
-      let removedNode: ListNode<T> | null = this.#head!;
+      const removedNode: ListNode<T> | null = this.#head!;
       this.#head = this.#head?.next ?? null;
       removedNode.next = null; // Remove reference to be Garbage Collected
     }
