@@ -1,6 +1,6 @@
 {
   "name": "memory-friendly-ds",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
@@ -18,7 +18,9 @@
     "format": "prettier --write src/**/*.ts && prettier --write tests/**/*.ts",
     "lint": "eslint src tests --fix",
     "typecheck": "tsc --noEmit",
-    "pre-commit": "npm run lint && npm run typecheck && npm run test && npm run format"
+    "pre-commit": "npm run lint && npm run typecheck && npm run test && npm run format",
+    "publish": "npm publish",
+    "prepublish": "npm run pre-commit && npm run build"
   },
   "keywords": [],
   "author": "",
