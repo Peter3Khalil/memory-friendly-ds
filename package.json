@@ -1,8 +1,11 @@
 {
   "name": "memory-friendly-ds",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "url": "https://github.com/Peter3Khalil/memory-friendly-ds"
+  },
   "files": [
     "dist"
   ],
