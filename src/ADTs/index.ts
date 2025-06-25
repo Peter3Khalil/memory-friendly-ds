@@ -1,3 +1,4 @@
 import LinkedList from './linked-list';
 import Queue from './queue';
-export { LinkedList, Queue };
+import Stack from './stack';
+export { LinkedList, Queue, Stack };
