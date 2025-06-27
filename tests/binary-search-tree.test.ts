@@ -10,12 +10,12 @@ describe('BinarySearchTree', () => {
   describe('insert()', () => {
     it('inserts values in correct order', () => {
       [10, 5, 15, 0].forEach((v) => bst.insert(v));
-      expect(bst.inOrderTraversal()).toEqual([0, 5, 10, 15]);
+      expect(bst.inOrder()).toEqual([0, 5, 10, 15]);
     });
 
     it('ignores duplicate values', () => {
       [10, 5, 15, 5, 10].forEach((v) => bst.insert(v));
-      expect(bst.inOrderTraversal()).toEqual([5, 10, 15]);
+      expect(bst.inOrder()).toEqual([5, 10, 15]);
     });
   });
 
@@ -58,11 +58,11 @@ describe('BinarySearchTree', () => {
     });
 
     it('returns correct in-order traversal', () => {
-      expect(bst.inOrderTraversal()).toEqual([3, 5, 7, 10, 12, 15, 20]);
+      expect(bst.inOrder()).toEqual([3, 5, 7, 10, 12, 15, 20]);
     });
 
     it('returns correct post-order traversal', () => {
-      expect(bst.postOrderTraversal()).toEqual([3, 7, 5, 12, 20, 15, 10]);
+      expect(bst.postOrder()).toEqual([3, 7, 5, 12, 20, 15, 10]);
     });
   });
 
@@ -71,7 +71,7 @@ describe('BinarySearchTree', () => {
       [10, 5, 15, 3, 7, 20].forEach((v) => bst.insert(v));
     };
 
-    const inOrder = () => bst.inOrderTraversal();
+    const inOrder = () => bst.inOrder();
 
     it('removes a leaf node', () => {
       buildTree();
@@ -148,7 +148,7 @@ describe('BinarySearchTree', () => {
       const values = Array.from({ length: 10000 }, (_, i) => i);
       values.forEach((v) => bst.insert(v));
       values.forEach((v) => bst.remove(v));
-      expect(bst.inOrderTraversal()).toEqual([]);
+      expect(bst.inOrder()).toEqual([]);
     });
   });
 });

@@ -124,7 +124,7 @@ export default class BinarySearchTree<T = unknown> {
     return currentNode?.value ?? null;
   }
 
-  inOrderTraversal(): T[] {
+  inOrder(): T[] {
     const stack = new Stack<BinaryNode<T>>();
     let curr = this.#root;
     const res: T[] = [];
@@ -141,7 +141,7 @@ export default class BinarySearchTree<T = unknown> {
     return res;
   }
 
-  postOrderTraversal(): T[] {
+  postOrder(): T[] {
     const res: T[] = [];
     const stack: Stack<BinaryNode<T>> = new Stack();
     let curr = this.#root;
