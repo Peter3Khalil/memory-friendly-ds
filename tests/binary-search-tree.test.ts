@@ -60,6 +60,10 @@ describe('BinarySearchTree', () => {
     it('returns correct in-order traversal', () => {
       expect(bst.inOrderTraversal()).toEqual([3, 5, 7, 10, 12, 15, 20]);
     });
+
+    it('returns correct post-order traversal', () => {
+      expect(bst.postOrderTraversal()).toEqual([3, 7, 5, 12, 20, 15, 10]);
+    });
   });
 
   describe('remove()', () => {

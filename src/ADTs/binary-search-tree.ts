@@ -140,4 +140,29 @@ export default class BinarySearchTree<T = unknown> {
 
     return res;
   }
+
+  postOrderTraversal(): T[] {
+    const res: T[] = [];
+    const stack: Stack<BinaryNode<T>> = new Stack();
+    let curr = this.#root;
+    let lastVisited: BinaryNode<T> | null = null;
+
+    while (stack.getSize() > 0 || curr) {
+      if (curr) {
+        stack.push(curr);
+        curr = curr.left;
+      } else {
+        const peekNode = stack.getTop()!.value;
+
+        if (peekNode.right && lastVisited !== peekNode.right) {
+          curr = peekNode.right;
+        } else {
+          res.push(peekNode.value);
+          lastVisited = stack.pop()!.value;
+        }
+      }
+    }
+
+    return res;
+  }
 }
