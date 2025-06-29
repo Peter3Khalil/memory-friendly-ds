@@ -151,4 +151,38 @@ describe('BinarySearchTree', () => {
       expect(bst.inOrder()).toEqual([]);
     });
   });
+
+  describe('height()', () => {
+    it('returns -1 for empty tree', () => {
+      expect(bst.height()).toBe(-1);
+    });
+
+    it('returns 0 for tree with only root', () => {
+      bst.insert(10);
+      expect(bst.height()).toBe(0);
+    });
+
+    it('returns correct height for balanced tree', () => {
+      [10, 5, 15, 3, 7, 12, 20].forEach((v) => bst.insert(v));
+      expect(bst.height()).toBe(2);
+    });
+
+    it('returns correct height for unbalanced tree', () => {
+      [1, 2, 3, 4, 5].forEach((v) => bst.insert(v));
+      expect(bst.height()).toBe(4);
+    });
+
+    it('returns correct height for deeply unbalanced tree with many nodes', () => {
+      const length = 10000;
+      Array.from({ length }, (_, i) => i).forEach((v) => bst.insert(v));
+      expect(bst.height()).toBe(length - 1);
+    });
+
+    it('updates height after removals', () => {
+      [10, 5, 15, 3, 7, 12, 20].forEach((v) => bst.insert(v));
+      bst.remove(5);
+      bst.remove(15);
+      expect(bst.height()).toBe(2);
+    });
+  });
 });

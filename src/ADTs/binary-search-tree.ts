@@ -124,6 +124,24 @@ export default class BinarySearchTree<T = unknown> {
     return currentNode?.value ?? null;
   }
 
+  height(): number {
+    if (!this.#root) return -1;
+    const stack = new Stack<[BinaryNode<T>, number]>();
+    stack.push([this.#root, 0]);
+    let maxHeight = 0;
+    while (stack.getSize() > 0) {
+      const [node, height] = stack.pop();
+      maxHeight = Math.max(maxHeight, height);
+      if (node.left) {
+        stack.push([node.left, height + 1]);
+      }
+      if (node.right) {
+        stack.push([node.right, height + 1]);
+      }
+    }
+    return maxHeight;
+  }
+
   inOrder(): T[] {
     const stack = new Stack<BinaryNode<T>>();
     let curr = this.#root;
