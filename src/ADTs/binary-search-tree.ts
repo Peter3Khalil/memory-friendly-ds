@@ -183,4 +183,20 @@ export default class BinarySearchTree<T = unknown> {
 
     return res;
   }
+
+  preOrder(): T[] {
+    const res: T[] = [];
+    const stack: Stack<BinaryNode<T>> = new Stack();
+    let curr = this.#root;
+    while (curr || stack.getSize() > 0) {
+      while (curr) {
+        res.push(curr.value);
+        stack.push(curr);
+        curr = curr.left;
+      }
+      const top = stack.pop();
+      curr = top.right;
+    }
+    return res;
+  }
 }

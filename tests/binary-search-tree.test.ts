@@ -53,16 +53,107 @@ describe('BinarySearchTree', () => {
   });
 
   describe('traversals', () => {
-    beforeEach(() => {
-      [10, 5, 15, 3, 7, 12, 20].forEach((v) => bst.insert(v));
+    describe('traversal with populated tree', () => {
+      beforeEach(() => {
+        [10, 5, 15, 3, 7, 12, 20].forEach((v) => bst.insert(v));
+      });
+
+      it('returns correct in-order traversal', () => {
+        expect(bst.inOrder()).toEqual([3, 5, 7, 10, 12, 15, 20]);
+      });
+
+      it('returns correct post-order traversal', () => {
+        expect(bst.postOrder()).toEqual([3, 7, 5, 12, 20, 15, 10]);
+      });
+
+      it('returns correct pre-order traversal', () => {
+        expect(bst.preOrder()).toEqual([10, 5, 3, 7, 15, 12, 20]);
+      });
     });
 
-    it('returns correct in-order traversal', () => {
-      expect(bst.inOrder()).toEqual([3, 5, 7, 10, 12, 15, 20]);
+    describe('in-order traversal', () => {
+      beforeEach(() => {
+        bst = new BinarySearchTree<number>();
+      });
+
+      it('returns empty array for empty tree', () => {
+        expect(bst.inOrder()).toEqual([]);
+      });
+
+      it('returns single value for single node tree', () => {
+        bst.insert(42);
+        expect(bst.inOrder()).toEqual([42]);
+      });
+
+      it('handles right-skewed tree correctly', () => {
+        [1, 2, 3, 4, 5].forEach((v) => bst.insert(v));
+        expect(bst.inOrder()).toEqual([1, 2, 3, 4, 5]);
+      });
+
+      it('handles left-skewed tree correctly', () => {
+        [5, 4, 3, 2, 1].forEach((v) => bst.insert(v));
+        expect(bst.inOrder()).toEqual([1, 2, 3, 4, 5]);
+      });
     });
 
-    it('returns correct post-order traversal', () => {
-      expect(bst.postOrder()).toEqual([3, 7, 5, 12, 20, 15, 10]);
+    describe('pre-order traversal', () => {
+      beforeEach(() => {
+        bst = new BinarySearchTree<number>();
+      });
+
+      it('returns empty array for empty tree', () => {
+        expect(bst.preOrder()).toEqual([]);
+      });
+
+      it('returns single value for single node tree', () => {
+        bst.insert(42);
+        expect(bst.preOrder()).toEqual([42]);
+      });
+
+      it('handles right-skewed tree correctly', () => {
+        [1, 2, 3].forEach((v) => bst.insert(v));
+        expect(bst.preOrder()).toEqual([1, 2, 3]);
+      });
+
+      it('handles left-skewed tree correctly', () => {
+        [3, 2, 1].forEach((v) => bst.insert(v));
+        expect(bst.preOrder()).toEqual([3, 2, 1]);
+      });
+
+      it('handles complex tree structure', () => {
+        [8, 3, 10, 1, 6, 14, 4, 7, 13].forEach((v) => bst.insert(v));
+        expect(bst.preOrder()).toEqual([8, 3, 1, 6, 4, 7, 10, 14, 13]);
+      });
+    });
+
+    describe('post-order traversal', () => {
+      beforeEach(() => {
+        bst = new BinarySearchTree<number>();
+      });
+
+      it('returns empty array for empty tree', () => {
+        expect(bst.postOrder()).toEqual([]);
+      });
+
+      it('returns single value for single node tree', () => {
+        bst.insert(42);
+        expect(bst.postOrder()).toEqual([42]);
+      });
+
+      it('handles right-skewed tree correctly', () => {
+        [1, 2, 3].forEach((v) => bst.insert(v));
+        expect(bst.postOrder()).toEqual([3, 2, 1]);
+      });
+
+      it('handles left-skewed tree correctly', () => {
+        [3, 2, 1].forEach((v) => bst.insert(v));
+        expect(bst.postOrder()).toEqual([1, 2, 3]);
+      });
+
+      it('handles complex tree structure', () => {
+        [8, 3, 10, 1, 6, 14, 4, 7, 13].forEach((v) => bst.insert(v));
+        expect(bst.postOrder()).toEqual([1, 4, 7, 6, 3, 13, 14, 10, 8]);
+      });
     });
   });
 
