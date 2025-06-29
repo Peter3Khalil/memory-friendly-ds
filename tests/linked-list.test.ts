@@ -11,8 +11,8 @@ describe('LinkedList', () => {
     expect(list.toArray()).toEqual(expected);
     expect(list.getSize()).toBe(expected.length);
     expect(list.isEmpty()).toBe(expected.length === 0);
-    expect(list.getHead()?.value).toBe(expected[0]);
-    expect(list.getTail()?.value).toBe(expected[expected.length - 1]);
+    expect(list.getHead()).toBe(expected[0] ?? null);
+    expect(list.getTail()).toBe(expected[expected.length - 1] ?? null);
   };
 
   describe('initial state', () => {
@@ -104,7 +104,7 @@ describe('LinkedList', () => {
       list.insertAtEnd(3);
       expect(list.removeFromEnd()).toBe(true);
       expect(list.getSize()).toBe(2);
-      expect(list.getTail()?.value).toBe(2);
+      expect(list.getTail()).toBe(2);
       expect(list.toArray()).toEqual([1, 2]);
     });
 
@@ -142,7 +142,7 @@ describe('LinkedList', () => {
       list.insertAtEnd(3);
       expect(list.removeFromFirst()).toBe(true);
       expect(list.getSize()).toBe(2);
-      expect(list.getHead()?.value).toBe(2);
+      expect(list.getHead()).toBe(2);
       expect(list.toArray()).toEqual([2, 3]);
     });
 
@@ -178,8 +178,8 @@ describe('LinkedList', () => {
       list.insertAtEnd(10);
       list.insertAtEnd(20);
       expect(list.remove(0)).toBe(true); // remove first (10)
-      expect(list.getHead()?.value).toBe(20);
-      expect(list.getTail()?.value).toBe(20);
+      expect(list.getHead()).toBe(20);
+      expect(list.getTail()).toBe(20);
       expect(list.toArray()).toEqual([20]);
     });
 
@@ -199,8 +199,8 @@ describe('LinkedList', () => {
       list.insertAtEnd(3);
       list.remove(0); // remove head
       list.remove(); // remove tail
-      expect(list.getHead()?.value).toBe(2);
-      expect(list.getTail()?.value).toBe(2);
+      expect(list.getHead()).toBe(2);
+      expect(list.getTail()).toBe(2);
       expect(list.toArray()).toEqual([2]);
     });
 

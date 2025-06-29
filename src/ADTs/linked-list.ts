@@ -156,12 +156,12 @@ export default class LinkedList<T = unknown> {
     return resultArray;
   }
 
-  getHead(): ListNode<T> | null {
-    return this.#head;
+  getHead(): T | null {
+    return this.#head?.value ?? null;
   }
 
-  getTail(): ListNode<T> | null {
-    return this.#tail;
+  getTail(): T | null {
+    return this.#tail?.value ?? null;
   }
 
   getSize(): number {

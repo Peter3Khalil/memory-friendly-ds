@@ -11,7 +11,7 @@ describe('Stack', () => {
     it('should add an element to an empty stack', () => {
       stack.push(10);
       expect(stack.getSize()).toBe(1);
-      expect(stack.getTop()?.value).toBe(10);
+      expect(stack.getTop()).toBe(10);
     });
 
     it('should add multiple elements to the stack', () => {
@@ -20,16 +20,16 @@ describe('Stack', () => {
       stack.push(30);
 
       expect(stack.getSize()).toBe(3);
-      expect(stack.getTop()?.value).toBe(30);
+      expect(stack.getTop()).toBe(30);
     });
 
     it('should maintain LIFO order when pushing', () => {
       stack.push(10);
       stack.push(20);
 
-      const removedValue = stack.pop()?.value;
+      const removedValue = stack.pop();
       expect(removedValue).toBe(20);
-      expect(stack.getTop()?.value).toBe(10);
+      expect(stack.getTop()).toBe(10);
     });
 
     it('should work with different data types', () => {
@@ -38,7 +38,7 @@ describe('Stack', () => {
       stringStack.push('world');
 
       expect(stringStack.getSize()).toBe(2);
-      expect(stringStack.getTop()?.value).toBe('world');
+      expect(stringStack.getTop()).toBe('world');
     });
 
     it('should allow pushing after popping', () => {
@@ -48,7 +48,7 @@ describe('Stack', () => {
       stack.push(30);
 
       expect(stack.getSize()).toBe(2);
-      expect(stack.getTop()?.value).toBe(30);
+      expect(stack.getTop()).toBe(30);
     });
   });
 
@@ -68,7 +68,7 @@ describe('Stack', () => {
       stack.push(20);
 
       const poppedNode = stack.pop();
-      expect(poppedNode?.value).toBe(20);
+      expect(poppedNode).toBe(20);
       expect(stack.getSize()).toBe(1);
     });
 
@@ -78,7 +78,7 @@ describe('Stack', () => {
       stack.push(30);
 
       stack.pop();
-      expect(stack.getTop()?.value).toBe(20);
+      expect(stack.getTop()).toBe(20);
     });
 
     it('should handle popping all elements', () => {
@@ -109,7 +109,7 @@ describe('Stack', () => {
       stack.push(10);
       stack.push(20);
 
-      expect(stack.getTop()?.value).toBe(20);
+      expect(stack.getTop()).toBe(20);
       expect(stack.getSize()).toBe(2); // Size unchanged
     });
 
@@ -119,8 +119,8 @@ describe('Stack', () => {
       const firstCall = stack.getTop();
       const secondCall = stack.getTop();
 
-      expect(firstCall?.value).toBe(10);
-      expect(secondCall?.value).toBe(10);
+      expect(firstCall).toBe(10);
+      expect(secondCall).toBe(10);
       expect(stack.getSize()).toBe(1);
     });
   });
@@ -216,7 +216,7 @@ describe('Stack', () => {
       stack.push(30);
 
       expect(stack.getSize()).toBe(1);
-      expect(stack.getTop()?.value).toBe(30);
+      expect(stack.getTop()).toBe(30);
     });
   });
 
@@ -245,7 +245,7 @@ describe('Stack', () => {
       stack.toArray();
 
       expect(stack.getSize()).toBe(2);
-      expect(stack.getTop()?.value).toBe(20);
+      expect(stack.getTop()).toBe(20);
     });
   });
 });

@@ -1,4 +1,4 @@
-import LinkedList, { ListNode } from './linked-list';
+import LinkedList from './linked-list';
 
 export default class Queue<T = unknown> {
   #list: LinkedList<T>;
@@ -9,7 +9,7 @@ export default class Queue<T = unknown> {
   enQueue(item: T): void {
     this.#list.insertAtEnd(item);
   }
-  deQueue(): ListNode<T> | null {
+  deQueue(): T | null {
     const item = this.getFront();
     this.#list.removeFromFirst();
     return item;
@@ -17,10 +17,10 @@ export default class Queue<T = unknown> {
   isEmpty(): boolean {
     return this.#list.isEmpty();
   }
-  getFront(): ListNode<T> | null {
+  getFront(): T | null {
     return this.#list.getHead();
   }
-  getRear(): ListNode<T> | null {
+  getRear(): T | null {
     return this.#list.getTail();
   }
   getSize(): number {

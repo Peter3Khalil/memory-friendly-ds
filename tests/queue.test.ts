@@ -11,8 +11,8 @@ describe('Queue - enQueue method', () => {
     queue.enQueue(5);
 
     expect(queue.getSize()).toBe(1);
-    expect(queue.getFront()?.value).toBe(5);
-    expect(queue.getRear()?.value).toBe(5);
+    expect(queue.getFront()).toBe(5);
+    expect(queue.getRear()).toBe(5);
   });
 
   it('should add multiple items to the queue', () => {
@@ -21,8 +21,8 @@ describe('Queue - enQueue method', () => {
     queue.enQueue(3);
 
     expect(queue.getSize()).toBe(3);
-    expect(queue.getFront()?.value).toBe(1);
-    expect(queue.getRear()?.value).toBe(3);
+    expect(queue.getFront()).toBe(1);
+    expect(queue.getRear()).toBe(3);
   });
 
   it('should add items successfully without errors', () => {
@@ -61,7 +61,7 @@ describe('Queue - deQueue method', () => {
     queue.enQueue(5);
     const dequeued = queue.deQueue();
 
-    expect(dequeued?.value).toBe(5);
+    expect(dequeued).toBe(5);
     expect(queue.isEmpty()).toBe(true);
   });
 
@@ -71,15 +71,15 @@ describe('Queue - deQueue method', () => {
     queue.enQueue(3);
 
     const first = queue.deQueue();
-    expect(first?.value).toBe(1);
+    expect(first).toBe(1);
     expect(queue.getSize()).toBe(2);
-    expect(queue.getFront()?.value).toBe(2);
+    expect(queue.getFront()).toBe(2);
 
     const second = queue.deQueue();
-    expect(second?.value).toBe(2);
+    expect(second).toBe(2);
     expect(queue.getSize()).toBe(1);
-    expect(queue.getFront()?.value).toBe(3);
-    expect(queue.getRear()?.value).toBe(3);
+    expect(queue.getFront()).toBe(3);
+    expect(queue.getRear()).toBe(3);
   });
 
   it('should dequeue all items correctly', () => {
@@ -87,9 +87,9 @@ describe('Queue - deQueue method', () => {
     queue.enQueue(20);
     queue.enQueue(30);
 
-    expect(queue.deQueue()?.value).toBe(10);
-    expect(queue.deQueue()?.value).toBe(20);
-    expect(queue.deQueue()?.value).toBe(30);
+    expect(queue.deQueue()).toBe(10);
+    expect(queue.deQueue()).toBe(20);
+    expect(queue.deQueue()).toBe(30);
     expect(queue.deQueue()).toBeNull();
     expect(queue.isEmpty()).toBe(true);
   });
@@ -132,7 +132,7 @@ describe('Queue - getFront method', () => {
   it('should return the first item added to the queue', () => {
     queue.enQueue(10);
     queue.enQueue(20);
-    expect(queue.getFront()?.value).toBe(10);
+    expect(queue.getFront()).toBe(10);
   });
 
   it('should not remove the item from the queue', () => {
@@ -156,14 +156,14 @@ describe('Queue - getRear method', () => {
   it('should return the last item added to the queue', () => {
     queue.enQueue(10);
     queue.enQueue(20);
-    expect(queue.getRear()?.value).toBe(20);
+    expect(queue.getRear()).toBe(20);
   });
 
   it('should update when new items are added', () => {
     queue.enQueue(5);
-    expect(queue.getRear()?.value).toBe(5);
+    expect(queue.getRear()).toBe(5);
     queue.enQueue(10);
-    expect(queue.getRear()?.value).toBe(10);
+    expect(queue.getRear()).toBe(10);
   });
 });
 
@@ -218,7 +218,7 @@ describe('Queue - toArray method', () => {
     queue.enQueue(20);
     queue.toArray();
     expect(queue.getSize()).toBe(2);
-    expect(queue.getFront()?.value).toBe(10);
+    expect(queue.getFront()).toBe(10);
   });
 });
 
@@ -256,12 +256,12 @@ describe('Queue - integration tests', () => {
     expect(queue.getSize()).toBe(2);
     expect(queue.toArray()).toEqual(['first', 'second']);
 
-    expect(queue.deQueue()?.value).toBe('first');
+    expect(queue.deQueue()).toBe('first');
     expect(queue.getSize()).toBe(1);
 
     queue.enQueue('third');
-    expect(queue.getFront()?.value).toBe('second');
-    expect(queue.getRear()?.value).toBe('third');
+    expect(queue.getFront()).toBe('second');
+    expect(queue.getRear()).toBe('third');
 
     queue.clear();
     expect(queue.isEmpty()).toBe(true);

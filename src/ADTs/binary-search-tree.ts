@@ -133,7 +133,7 @@ export default class BinarySearchTree<T = unknown> {
         stack.push(curr);
         curr = curr.left;
       }
-      curr = stack.pop()!.value;
+      curr = stack.pop();
       res.push(curr.value);
       curr = curr.right;
     }
@@ -152,13 +152,13 @@ export default class BinarySearchTree<T = unknown> {
         stack.push(curr);
         curr = curr.left;
       } else {
-        const peekNode = stack.getTop()!.value;
+        const peekNode = stack.getTop();
 
         if (peekNode.right && lastVisited !== peekNode.right) {
           curr = peekNode.right;
         } else {
           res.push(peekNode.value);
-          lastVisited = stack.pop()!.value;
+          lastVisited = stack.pop();
         }
       }
     }

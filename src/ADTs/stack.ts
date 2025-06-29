@@ -1,4 +1,4 @@
-import LinkedList, { ListNode } from './linked-list';
+import LinkedList from './linked-list';
 
 export default class Stack<T = unknown> {
   #list: LinkedList<T>;
@@ -10,13 +10,13 @@ export default class Stack<T = unknown> {
     this.#list.insertAtFirst(item);
   }
 
-  pop(): ListNode<T> | null {
+  pop(): T | null {
     const removedNode = this.#list.getHead();
     this.#list.removeFromFirst();
     return removedNode;
   }
 
-  getTop(): ListNode<T> | null {
+  getTop(): T | null {
     return this.#list.getHead();
   }
 
